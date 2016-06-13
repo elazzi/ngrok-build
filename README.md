@@ -52,13 +52,13 @@ manual way :
 		
 
 ### cross compile ngrokd and ngrok :
-sudo curl -O https://storage.googleapis.com/golang/go1.6.linux-amd64.tar.gz
-    sudo tar -xvf go1.6.linux-amd64.tar.gz
-    sudo mv go /usr/local
-    sudo nano ~/.profile
-At the end of the file, add  lines:
-	export GOROOT=/usr/local/go
-	export PATH=$PATH:$GOROOT/bin
+	sudo curl -O https://storage.googleapis.com/golang/go1.6.linux-amd64.tar.gz
+	    sudo tar -xvf go1.6.linux-amd64.tar.gz
+	    sudo mv go /usr/local
+	    sudo nano ~/.profile
+	At the end of the file, add  lines:
+		export GOROOT=/usr/local/go
+		export PATH=$PATH:$GOROOT/bin
 
 	source ~/.profile
 	./ngrok-build.sh prepare
