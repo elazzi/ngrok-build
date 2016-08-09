@@ -132,7 +132,7 @@ case $ACTION in
 		rm -Rf $GOTOOLCHAIN
 		mkdir -p $GOTOOLCHAIN
 		cd $GOTOOLCHAIN
-		$GONATIVE_HOME/bin/gonative build --version="$GOVER" --platforms="windows_386 windows_amd64 linux_386 linux_amd64 darwin_386 darwin_amd64"
+		$GONATIVE_HOME/bin/gonative build --version="$GOVER" --platforms="windows_386 windows_amd64 linux_arm linux_386 linux_amd64 darwin_386 darwin_amd64"
 
 	;;
 
@@ -150,14 +150,14 @@ case $ACTION in
 		echo "release-client-gox: client-gox">>Makefile-gox
 		echo "">>Makefile-gox
 		echo "client-gox: deps">>Makefile-gox
-		echo "		  $GOX_HOME/bin/gox -tags '\$(BUILDTAGS)' -osarch='windows/386 windows/amd64 linux/386 linux/amd64 darwin/386 darwin/amd64' ngrok/main/ngrok">>Makefile-gox
+		echo "		  $GOX_HOME/bin/gox -tags '\$(BUILDTAGS)' -osarch='windows/386 windows/amd64 linux/arm linux/386 linux/amd64 darwin/386 darwin/amd64' ngrok/main/ngrok">>Makefile-gox
 
 		echo "">>Makefile-gox
 		echo "release-server-gox: BUILDTAGS=release">>Makefile-gox
 		echo "release-server-gox: server-gox">>Makefile-gox
 		echo "">>Makefile-gox
 		echo "server-gox: deps">>Makefile-gox
-		echo "		  $GOX_HOME/bin/gox -tags '\$(BUILDTAGS)' -osarch='windows/386 windows/amd64 linux/386 linux/amd64 darwin/386 darwin/amd64' ngrok/main/ngrokd">>Makefile-gox
+		echo "		  $GOX_HOME/bin/gox -tags '\$(BUILDTAGS)' -osarch='windows/386 windows/amd64 linux/armlinux/386 linux/amd64 darwin/386 darwin/amd64' ngrok/main/ngrokd">>Makefile-gox
 
 
 
