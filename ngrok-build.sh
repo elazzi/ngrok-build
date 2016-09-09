@@ -8,7 +8,10 @@ source $_CURRENT_FILE_DIR/stella-link.sh include
 # FROM 1.7.1 to latest version on master
 # git format-patch 1.7.1 --stdout > ngrok_patch_1.7.1_TO_20160312.patch
 
-DEFAULT_GOVER="1.4.2"
+#DEFAULT_GOVER="1.4.2"
+wget https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz
+tar -C /usr/local -xzf go1.7.1.linux-amd64.tar.gz
+export PATH=$PATH:/usr/local/go/bin
 
 function usage() {
     echo "USAGE :"
@@ -54,6 +57,7 @@ function gen_cert() {
 
 
 function check_requirements() {
+	apt-get install make gcc patch git mercurial
 	if [ -z $(which make) ]; then 
 		echo " WARN : you have to install gnu make on your system"
 		exit 1
@@ -122,17 +126,20 @@ case $ACTION in
         echo "** install gox"
         export GOPATH=$GOX_HOME
         go get github.com/mitchellh/gox
-        #export GOPATH=$STELLA_APP_WORK_ROOT
+        export GOPATH=$STELLA_APP_WORK_ROOT
 
         echo "** install gonative"
         export GOPATH=$GONATIVE_HOME
-		go get github.com/inconshreveable/gonative
-
-		echo "** build cross compiling native buildchain"
-		rm -Rf $GOTOOLCHAIN
-		mkdir -p $GOTOOLCHAIN
-		cd $GOTOOLCHAIN
-		$GONATIVE_HOME/bin/gonative build --version="$GOVER" --platforms="windows_386 windows_amd64 linux_arm linux_386 linux_amd64 darwin_386 darwin_amd64"
+		#go get github.com/inconshreveable/gonative
+		cd $STELLA_APP_WORK_ROOT
+		git clone https://github.com/inconshreveable/gonative
+		cd gonative
+		make
+		#echo "** build cross compiling native buildchain"
+		#rm -Rf $GOTOOLCHAIN
+		#mkdir -p $GOTOOLCHAIN
+		#cd $GOTOOLCHAIN
+		#$GONATIVE_HOME/gonative build --version="1.7.1" --platforms="windows_386 windows_amd64 linux_arm linux_386 linux_amd64 darwin_386 darwin_amd64"
 
 	;;
 
